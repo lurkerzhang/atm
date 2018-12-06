@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/模拟实现一个ATM+购物商城程序.iml" filepath="$PROJECT_DIR$/.idea/模拟实现一个ATM+购物商城程序.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/atm.iml" filepath="$PROJECT_DIR$/.idea/atm.iml" />
     </modules>
   </component>
 </project>

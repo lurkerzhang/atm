@@ -1,0 +1,1 @@
+{'users': [['aric', '123456'], ['alex', '123456'], ['shanshan', '123456'], ['zhang', '123456']], 'goods': [{'name': '电脑', 'price': 1999}, {'name': '鼠标', 'price': 10}, {'name': '游艇', 'price': 20}, {'name': '美女', 'price': 998},{'name': '手机', 'price': 3000},{'name': '相机', 'price': 19000},{'name': '冰箱', 'price': 5000}]}
