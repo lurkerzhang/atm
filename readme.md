@@ -1,1 +1,1 @@
-atm + shopping market
+atm + shopping mall
