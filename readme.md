@@ -1,0 +1,1 @@
+atm + shopping market
