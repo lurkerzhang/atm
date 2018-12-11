@@ -6,6 +6,7 @@ from docs.conf import DBDIR
 import json
 import os.path
 import os
+from docs.logger import *
 logined = False
 
 
@@ -34,8 +35,10 @@ def login():
         for i in admin_list:
             if i['name'] == user and i['password'] == pwd:
                 logined = True
+                logger.info('%s login in atm control system.' % user)
                 return True
             else:
+                logger.warning('%s use wrong username or password to try to login to the system' % user)
                 print('管理用户名或密码错误')
 
 
@@ -106,9 +109,10 @@ def add_account(bank_list):
                                         if repay_day.isdigit():
                                             if 0 < int(repay_day) < 29:
                                                 repay_day = int(repay_day)
-                                                new_account = {'account': account, 'password': password, 'balance': balance,
+                                                new_account = {'account': account, 'password': password, 'balance': float(balance),
                                                                'max':limit ,'limit': limit, 'repay_day': repay_day, 'status': 1,
                                                                'is_logined': False, 'record': []}
+                                                print('成功添加账户：%s' % new_account['account'])
                                                 bank_list.append(new_account)
                                                 return bank_list
                                             else:
@@ -190,15 +194,19 @@ def super_admin():
         print('选择>>>')
         s = input().strip()
         if s == '1':
+            logger.info('show the accounts')
             show_accounts(bank_list)
         elif s == '2':
+            logger.info('try to add an account to bank database')
             bank_list = add_account(bank_list)
         elif s == '3':
+            logger.info('try to maintain the accounts')
             bank_list = maintain(bank_list)
         elif s == '4':
             save_db_bank(bank_list)
             exit('退出ATM超级管理员系统，再见！')
         else:
+            logger.error('something wrong in typing')
             print('输入错误')
 
 

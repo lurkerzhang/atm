@@ -1,0 +1,1 @@
+{'name': 'aric', 'is_logined': False, 'shopping_cart': {'goods': {}, 'money': 0}, 'shopping_record': [{'time': 'Wed Dec 12 02:22:33 2018', 'goods': {'goods': {'电脑': 1, '鼠标': 1}, 'money': 2009}}, {'time': 'Wed Dec 12 02:31:03 2018', 'goods': {'goods': {'电脑': 1}, 'money': 1999}}]}

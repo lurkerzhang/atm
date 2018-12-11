@@ -1,24 +1,12 @@
 #!_*_coding:utf-8 _*_
 # __author__:"lurkerzhang"
-from docs.conf import DATABASE, DBDIR
+from docs.conf import DATABASE, DBDIR, BASEDIR
 import json
 import os
 from atm.bank_auth import auth
-import time
 from atm.admin import super_admin
-
-# 打印菜单
-def show_menu():
-    print('''=====\033[1;33;44m ATM操作选项 \033[0m======
-[A]----------->查看账户详情
-[B]----------->转账
-[C]----------->还款
-[D]----------->购物
-[E]----------->查看流水
-[F]----------->查看日志
-[G]----------->超级管理
-[Q]----------->退出 ''')
-
+from docs.logger import *
+import time
 
 @auth
 # 打印账户详情
@@ -74,7 +62,7 @@ def transfer(my_account):
             my_account['record'].append(rd1)
             bank_list[i]['record'].append(rd2)
             my_account['balance'] -= transfer_money
-
+            print('你向账号：%s 转账%s元' % (transfer_account, transfer_money))
             save_account(bank_list[i])
             return my_account
     print('转账失败，转入账号不存在！')
@@ -85,35 +73,40 @@ def transfer(my_account):
 @auth
 def repay(my_account):
     print('当前银行卡余额为：%s元，信用卡欠款：%s元' % (my_account['balance'], my_account['max']-my_account['limit']))
-    while True:
-        print('还款金额>>>')
-        repay_money = input()
-        if repay_money.isdigit():
-            repay_money = float(repay_money)
-            if repay_money > float(my_account['max'])-float(my_account['limit']):
-                print('还款太多了，没欠这么多钱！')
-                continue
-            elif repay_money <=0:
-                print('输入错误')
-                continue
-            elif repay_money > my_account['balance']:
-                print('余额不足')
-                continue
-            else:
-                my_account['balance'] -= repay_money
-                my_account['limit'] += repay_money
-                # 获取转账当前时间
-                now = time.asctime(time.localtime(time.time()))
-                rd = {'time': now, 'msg': '你向信用卡账户：%s 还款%s元' % (my_account['account'], repay_money)}
-                my_account['record'].append(rd)
-                if my_account['limit'] == my_account['max']:
-                    print('恭喜你，已还清信用卡，当前额度为:%s元' % my_account['limit'])
+    if my_account['max'] == my_account['limit']:
+        print('没有欠款，不用还！')
+        return my_account
+    else:
+        while True:
+            print('还款金额>>>')
+            repay_money = input()
+            if repay_money.isdigit():
+                repay_money = float(repay_money)
+                if repay_money > float(my_account['max'])-float(my_account['limit']):
+                    print('还款太多了，没欠这么多钱！')
+                    continue
+                elif repay_money <=0:
+                    print('输入错误')
+                    continue
+                elif repay_money > my_account['balance']:
+                    print('余额不足')
+                    continue
                 else:
-                    print('信用卡未还清，当前还欠款：%s元' % (float(my_account['max'])-float(my_account['limit'])))
-                return my_account
-        else:
-            print('输入错误！')
-            continue
+                    my_account['balance'] -= repay_money
+                    my_account['limit'] += repay_money
+                    # 获取转账当前时间
+                    now = time.asctime(time.localtime(time.time()))
+                    rd = {'time': now, 'msg': '你向信用卡账户：%s 还款%s元' % (my_account['account'], repay_money)}
+                    my_account['record'].append(rd)
+                    print('你向信用卡账户：%s 还款%s元' % (my_account['account'], repay_money))
+                    if my_account['limit'] == my_account['max']:
+                        print('恭喜你，已还清信用卡，当前额度为:%s元' % my_account['limit'])
+                    else:
+                        print('信用卡未还清，当前还欠款：%s元' % (float(my_account['max'])-float(my_account['limit'])))
+                    return my_account
+            else:
+                print('输入错误！')
+                continue
 
 
 # 显示流水
@@ -169,6 +162,19 @@ def get_bank_list(my_acount):
     return [my_acount, db_dict.get('bank')]
 
 
+# 打印菜单
+def show_menu():
+    print('''=====\033[1;33;44m ATM操作选项 \033[0m======
+[A]----------->查看账户详情
+[B]----------->转账
+[C]----------->还款
+[D]----------->购物
+[E]----------->查看流水
+[F]----------->查看日志
+[G]----------->超级管理
+[Q]----------->退出 ''')
+
+
 # 读账户数据
 def get_my_account(account):
     account_db_path = os.path.join(DBDIR, account)
@@ -191,21 +197,27 @@ def run():
     my_account = {'account': '', 'password': '', 'balance': 0, 'limit': 0, 'repay_day': 0, 'status': 0,
                   'is_logined': False, 'record': []}
     my_account = get_bank_list(my_account)[0]
+    logger.info('%s login in the atm.' % my_account['account'])
     while True:
         show_menu()
         print('选择>>>')
         s = input()
         if s.strip().upper() == "Q":
+            logger.info('%s login out the atm.' % my_account['account'])
             save_account(my_account)
             print("退出ATM，再见！")
             exit()
         elif s.strip().upper() == "A":
+            logger.info('%s print the account.' % my_account['account'])
             my_account = show_account(my_account)
         elif s.strip().upper() == "B":
+            logger.info('%s try to transfer money.' % my_account['account'])
             my_account = transfer(my_account)
         elif s.strip().upper() == "C":
+            logger.info('%s try to repay the credit.' % my_account['account'])
             my_account = repay(my_account)
         elif s.strip().upper() == "D":
+            logger.info('%s go to the shopping mall.' % my_account['account'])
             shopping_mall_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
                                               'shopping_mall\main.py')
             os.system('python %s' % shopping_mall_path)
@@ -215,12 +227,16 @@ def run():
                     my_account['limit'] = i['limit']
                     my_account['record'] = i['record']
         elif s.strip().upper() == "E":
+            logger.info('%s check the details.' % my_account['account'])
             my_account = show_details(my_account)
         elif s.strip().upper() == "F":
-            pass
+            logger.info('%s try to check the log file.' % my_account['account'])
+            logs_dir = os.path.join(BASEDIR, 'log')
+            os.system('explorer.exe /n, %s' % logs_dir)
         elif s.strip().upper() == "G":
             # 退出当前银行账户登陆状态
             save_account(my_account)
+            print('退出atm用户系统，进入超级管理系统')
             super_admin()
         elif s.strip().upper() == "Q":
             save_account(my_account)

@@ -1,0 +1,52 @@
+2018-12-12 02:08:46,599 - core.py[line:196] - INFO: 0123456789 login in the atm.
+2018-12-12 02:09:03,524 - core.py[line:206] - INFO: 0123456789 print the account.
+2018-12-12 02:09:03,525 - core.py[line:196] - INFO: 0123456789 login in the atm.
+2018-12-12 02:09:26,708 - core.py[line:212] - INFO: 0123456789 try to repay the credit.
+2018-12-12 02:14:14,906 - core.py[line:199] - INFO: 0123456789 login in the atm.
+2018-12-12 02:14:21,773 - core.py[line:216] - INFO: 0123456789 try to repay the credit.
+2018-12-12 02:14:35,638 - core.py[line:210] - INFO: 0123456789 print the account.
+2018-12-12 02:14:44,670 - core.py[line:210] - INFO: 0123456789 print the account.
+2018-12-12 02:14:47,938 - core.py[line:213] - INFO: 0123456789 try to transfer money.
+2018-12-12 02:15:18,713 - core.py[line:229] - INFO: 0123456789 check the details.
+2018-12-12 02:22:02,456 - core.py[line:133] - INFO: aric login into the shopping mall.
+2018-12-12 02:22:19,116 - core.py[line:157] - INFO: aric check the goods.
+2018-12-12 02:22:21,063 - core.py[line:160] - INFO: aric check the cart.
+2018-12-12 02:22:23,878 - core.py[line:169] - INFO: aric try to pay the goods in the cart.
+2018-12-12 02:22:41,943 - core.py[line:166] - INFO: aric check the records.
+2018-12-12 02:29:03,814 - core.py[line:200] - INFO: 0123456789 login in the atm.
+2018-12-12 02:29:19,224 - core.py[line:233] - INFO: 0123456789 try to check the log file.
+2018-12-12 02:30:09,768 - core.py[line:230] - INFO: 0123456789 check the details.
+2018-12-12 02:30:17,135 - core.py[line:220] - INFO: 0123456789 go to the shopping mall.
+2018-12-12 02:30:22,783 - core.py[line:133] - INFO: aric login into the shopping mall.
+2018-12-12 02:30:37,203 - core.py[line:163] - INFO: aric try to buy something.
+2018-12-12 02:31:09,038 - core.py[line:166] - INFO: aric check the records.
+2018-12-12 02:31:21,568 - core.py[line:160] - INFO: aric check the cart.
+2018-12-12 02:31:24,677 - core.py[line:157] - INFO: aric check the goods.
+2018-12-12 02:31:31,386 - core.py[line:166] - INFO: aric check the records.
+2018-12-12 02:31:44,832 - core.py[line:206] - INFO: 0123456789 login out the atm.
+2018-12-12 02:35:10,663 - core.py[line:200] - INFO: 0123456789 login in the atm.
+2018-12-12 02:35:21,041 - core.py[line:211] - INFO: 0123456789 print the account.
+2018-12-12 02:35:25,395 - core.py[line:214] - INFO: 0123456789 try to transfer money.
+2018-12-12 02:35:41,907 - core.py[line:230] - INFO: 0123456789 check the details.
+2018-12-12 02:35:51,857 - core.py[line:233] - INFO: 0123456789 try to check the log file.
+2018-12-12 02:36:09,059 - admin.py[line:41] - WARNING: admiin use wrong username or password to try to login to the system
+2018-12-12 02:36:12,527 - admin.py[line:38] - INFO: admin login in atm control system.
+2018-12-12 02:36:21,285 - admin.py[line:196] - INFO: show the accounts
+2018-12-12 02:36:44,156 - admin.py[line:199] - INFO: try to add an account to bank database
+2018-12-12 02:38:32,809 - core.py[line:200] - INFO: 0123456789 login in the atm.
+2018-12-12 02:38:51,500 - admin.py[line:38] - INFO: admin login in atm control system.
+2018-12-12 02:38:53,088 - admin.py[line:200] - INFO: try to add an account to bank database
+2018-12-12 02:39:18,451 - admin.py[line:197] - INFO: show the accounts
+2018-12-12 02:40:39,610 - core.py[line:200] - INFO: 0123456789 login in the atm.
+2018-12-12 02:40:45,229 - admin.py[line:38] - INFO: admin login in atm control system.
+2018-12-12 02:40:48,295 - admin.py[line:197] - INFO: show the accounts
+2018-12-12 02:41:39,687 - admin.py[line:197] - INFO: show the accounts
+2018-12-12 02:41:45,899 - admin.py[line:200] - INFO: try to add an account to bank database
+2018-12-12 02:42:12,772 - admin.py[line:197] - INFO: show the accounts
+2018-12-12 02:43:54,114 - core.py[line:200] - INFO: 0123456789 login in the atm.
+2018-12-12 02:43:58,351 - core.py[line:230] - INFO: 0123456789 check the details.
+2018-12-12 02:44:17,608 - admin.py[line:38] - INFO: admin login in atm control system.
+2018-12-12 02:44:21,955 - admin.py[line:197] - INFO: show the accounts
+2018-12-12 02:44:25,319 - admin.py[line:203] - INFO: try to maintain the accounts
+2018-12-12 02:45:36,906 - core.py[line:200] - INFO: 0987654321 login in the atm.
+2018-12-12 02:45:42,852 - core.py[line:233] - INFO: 0987654321 try to check the log file.

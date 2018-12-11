@@ -5,16 +5,8 @@ from docs.conf import DBDIR, DATABASE
 import os, os.path
 import json
 from atm.core import pay
+from docs.logger import *
 import time
-
-
-# 读取数据库
-@auth
-def get_db_dic(me_data):
-    with open(DATABASE, 'r', encoding='utf-8') as db:
-        db_dict = json.load(db)
-    return [me_data, db_dict]
-
 
 # 保存用户历史数据
 @auth
@@ -46,6 +38,14 @@ def history(me_data):
     return usd
 
 
+# 读取数据库
+@auth
+def get_db_dic(me_data):
+    with open(DATABASE, 'r', encoding='utf-8') as db:
+        db_dict = json.load(db)
+    return [me_data, db_dict]
+
+
 # 打印商品
 def show_goods(goods):
     print('''=====\033[1;33;44m 商品列表 \033[0m=====
@@ -57,7 +57,7 @@ def show_goods(goods):
 # 打印主菜单
 def show_menu():
     print('''
-=====\033[1;33;44m 选择菜单 \033[0m======
+=====\033[1;33;44m 购物商城选项 \033[0m======
 [A]----------->显示商品列表
 [B]----------->查看购物车
 [C]----------->选购商品
@@ -70,7 +70,7 @@ def show_menu():
 def show_cart(me_data):
     cart = me_data.get('shopping_cart')
     if not cart.get('goods'):
-        print('购物车为空！')
+        print('购物车已为空！')
     else:
         print("=======\033[1;33;44m 购物车 \033[0m=======")
         for name, amount in cart['goods'].items():
@@ -81,7 +81,7 @@ def show_cart(me_data):
 # 打印购买记录
 def show_record(record):
     if not record:
-        print('购物车记录为空')
+        print('购买记录为空')
     else:
         print('=====================\033[1;33;44m 购买记录 \033[0m==================')
         for i in record:
@@ -130,6 +130,7 @@ def run():
 
     goods = data[1]['goods']
     me = me_data.get('name')
+    logger.info('%s login into the shopping mall.' % me)
     # 尝试读取用户历史信息
     last_data = history(me_data)
     if last_data:
@@ -153,14 +154,19 @@ def run():
             print("退出购物商城，再见！")
             exit()
         elif s.strip().upper() == "A":
+            logger.info('%s check the goods.' % me)
             show_goods(goods)
         elif s.strip().upper() == "B":
+            logger.info('%s check the cart.' % me)
             show_cart(me_data)
         elif s.strip().upper() == 'C':
+            logger.info('%s try to buy something.' % me)
             me_data = buy(me_data, goods, me)
         elif s.strip().upper() == 'D':
+            logger.info('%s check the records.' % me)
             show_record(me_data['shopping_record'])
         elif s.strip().upper() == "E":
+            logger.info('%s try to pay the goods in the cart.' % me)
             _account = {'account': '', 'password': '', 'balance': 0, 'limit': 0, 'repay_day': 0, 'status': 0,
                         'is_logined': False}
             me_data = to_pay(_account, me_data)
@@ -184,5 +190,5 @@ def to_pay(my_account, me_data):
         else:
             print('结算失败')
     else:
-        print('购物车为空，无法结算。')
+        print('购物车已为空，无法结算。')
     return me_data
